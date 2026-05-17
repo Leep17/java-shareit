@@ -22,7 +22,7 @@ public class BookingDto {
                       Long itemId,
                       Long idBooker,
                       BookingStatus status) {
-        this.id =id;
+        this.id = id;
         this.start = start;
         this.end = end;
         this.itemId = itemId;

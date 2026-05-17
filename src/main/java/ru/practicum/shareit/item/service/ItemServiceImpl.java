@@ -16,12 +16,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ItemServiceImpl implements ItemService{
+public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
     private final UserRepository userRepository;
 
     @Override
-    public Item save (ItemDto itemDto, Long userId) {
+    public Item save(ItemDto itemDto, Long userId) {
 
         User user = userRepository.findById(userId);
         Item item = ItemMapper.toItem(itemDto);

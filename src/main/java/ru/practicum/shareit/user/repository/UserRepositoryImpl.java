@@ -7,7 +7,7 @@ import ru.practicum.shareit.user.User;
 import java.util.*;
 
 @Repository
-public class UserRepositoryImpl implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
     private final Map<Long, User> users = new HashMap<>();
 
     @Override
@@ -17,7 +17,7 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public User findById(Long id) {
-        if(users.get(id) == null){
+        if (users.get(id) == null) {
             throw  new NotFoundException("Пользователь с id=" + id + " не найден");
         }
         return users.get(id);
@@ -49,7 +49,6 @@ public class UserRepositoryImpl implements UserRepository{
         findById(id);
         users.remove(id);
     }
-
 
     private long getNextId() {
         long currentMaxId = users.keySet()

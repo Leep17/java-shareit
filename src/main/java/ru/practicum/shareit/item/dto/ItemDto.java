@@ -4,23 +4,24 @@ import lombok.Data;
 /**
  * TODO Sprint add-controllers.
  */
+
 @Data
 public class ItemDto {
     private Long id;
     private String name;
     private String description;
-    private Boolean Available;
+    private Boolean available;
     private Long idRequest;
 
     public ItemDto(Long id,
                    String name,
                    String description,
-                   Boolean Available,
+                   Boolean available,
                    Long idRequest) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.Available = Available;
+        this.available = available;
         this.idRequest = idRequest;
     }
 }

@@ -7,7 +7,7 @@ import ru.practicum.shareit.item.model.Item;
 import java.util.*;
 
 @Repository
-public class ItemRepositoryImpl implements ItemRepository{
+public class ItemRepositoryImpl implements ItemRepository {
 
     private final Map<Long, Item> items = new HashMap<>();
 
@@ -26,7 +26,7 @@ public class ItemRepositoryImpl implements ItemRepository{
             changeItem.setName(item.getName());
         }
 
-        if (item.getDescription()!=null) {
+        if (item.getDescription() != null) {
             changeItem.setDescription(item.getDescription());
         }
 

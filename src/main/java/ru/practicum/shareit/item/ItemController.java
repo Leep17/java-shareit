@@ -15,23 +15,24 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/items")
 public class ItemController {
+
     private final ItemService itemService;
 
     @GetMapping
-    public List<ItemDto> findAll(@RequestHeader("X-Sharer-User-Id") Long userId){
+    public List<ItemDto> findAll(@RequestHeader("X-Sharer-User-Id") Long userId) {
         return itemService.findAll(userId).stream()
                 .map(ItemMapper::toItemDto)
                 .toList();
     }
 
     @GetMapping("/{itemId}")
-    public ItemDto findItemById(@PathVariable Long itemId){
+    public ItemDto findItemById(@PathVariable Long itemId) {
 
         return ItemMapper.toItemDto(itemService.findById(itemId));
     }
 
     @GetMapping("/search")
-    public List<ItemDto> findItemsByText(@RequestParam String text){
+    public List<ItemDto> findItemsByText(@RequestParam String text) {
 
         return itemService.findByText(text).stream()
                 .map(ItemMapper::toItemDto)
@@ -41,13 +42,13 @@ public class ItemController {
     @PatchMapping("/{itemId}")
     public ItemDto update(@PathVariable Long itemId,
                           @RequestHeader("X-Sharer-User-Id") Long userId,
-                          @RequestBody ItemDto itemDto){
+                          @RequestBody ItemDto itemDto) {
         return ItemMapper.toItemDto(itemService.update(itemDto, userId, itemId));
     }
 
     @PostMapping
     public ItemDto saveItem(@RequestHeader("X-Sharer-User-Id") Long userId,
-                    @RequestBody ItemDto itemDto){
+                    @RequestBody ItemDto itemDto) {
         return ItemMapper.toItemDto(itemService.save(itemDto, userId));
     }
 

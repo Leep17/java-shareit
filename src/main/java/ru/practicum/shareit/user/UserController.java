@@ -15,7 +15,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<UserDto> getAll(){
+    public List<UserDto> getAll() {
         return userService.getAll().stream()
                 .map(UserMapper::toUserDto)
                 .toList();
@@ -32,16 +32,14 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    public void deleteUser(@PathVariable Long userId){
+    public void deleteUser(@PathVariable Long userId) {
         userService.deleteById(userId);
     }
 
     @PatchMapping("/{userId}")
     public UserDto updateUser(@PathVariable Long userId,
-                              @RequestBody UserDto userDto){
+                              @RequestBody UserDto userDto) {
 
         return UserMapper.toUserDto(userService.updateUser(userId, UserMapper.toUser(userDto)));
     }
-
 }
-
