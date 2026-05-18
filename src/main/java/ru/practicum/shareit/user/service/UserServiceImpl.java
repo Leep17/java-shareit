@@ -25,13 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(User user) {
-        if (user.getEmail() == null || user.getEmail().isBlank()) {
-            throw new ValidationException("Email не может быть пустым");
-        }
-
-        if (!user.getEmail().contains("@")) {
-            throw new ValidationException("Некорректный email");
-        }
+        validateEmail(user.getEmail());
 
         boolean emailExists = userRepository.findAll().stream()
                 .anyMatch(existingUser -> existingUser.getEmail().equals(user.getEmail()));
@@ -46,15 +40,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(Long id, User user) {
         if (user.getEmail() != null) {
-            if (!user.getEmail().contains("@")) {
-                throw new ValidationException("Некорректный email");
-            }
+
+            validateEmail(user.getEmail());
 
             boolean emailExists = userRepository.findAll().stream()
-                    .anyMatch(existingUser ->
-                            existingUser.getEmail().equals(user.getEmail())
-                                    && !existingUser.getId().equals(id)
-                    );
+                    .filter(existingUser -> existingUser.getEmail().equals(user.getEmail()))
+                    .anyMatch(existingUser -> !existingUser.getId().equals(id));
 
             if (emailExists) {
                 throw new ConflictException("Email уже используется");
@@ -66,5 +57,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    private void validateEmail(String email) {
+        if (email == null || email.isBlank()) {
+            throw new ValidationException("Email не может быть пустым");
+        }
+
+        if (!email.contains("@")) {
+            throw new ValidationException("Некорректный email");
+        }
     }
 }

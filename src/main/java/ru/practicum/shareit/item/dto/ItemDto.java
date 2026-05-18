@@ -1,11 +1,13 @@
 package ru.practicum.shareit.item.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 /**
  * TODO Sprint add-controllers.
  */
 
 @Data
+@AllArgsConstructor
 public class ItemDto {
     private Long id;
     private String name;
@@ -13,15 +15,4 @@ public class ItemDto {
     private Boolean available;
     private Long idRequest;
 
-    public ItemDto(Long id,
-                   String name,
-                   String description,
-                   Boolean available,
-                   Long idRequest) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.available = available;
-        this.idRequest = idRequest;
-    }
 }
