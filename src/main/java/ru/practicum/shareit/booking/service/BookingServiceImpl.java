@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.Booking;
 import ru.practicum.shareit.booking.BookingStatus;
 import ru.practicum.shareit.booking.dto.BookingCreateDto;
-import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.mapper.BookingMapper;
 import ru.practicum.shareit.booking.repository.BookingRepository;
 import ru.practicum.shareit.exception.NotFoundException;
@@ -14,14 +13,12 @@ import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.repository.ItemRepository;
 import ru.practicum.shareit.user.User;
 import ru.practicum.shareit.user.repository.UserRepository;
-
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BookingServiceImpl implements BookingService{
+public class BookingServiceImpl implements BookingService {
     public final BookingRepository bookingRepository;
     public final UserRepository userRepository;
     public final ItemRepository itemRepository;
@@ -58,7 +55,7 @@ public class BookingServiceImpl implements BookingService{
 
         Long ownerId = booking.getItem().getOwner().getId();
 
-        if(!ownerId.equals(userId)){
+        if (!ownerId.equals(userId)) {
             throw new ValidationException("Подтвердить бронирование может только владелец вещи");
         }
 
@@ -66,9 +63,9 @@ public class BookingServiceImpl implements BookingService{
             throw new ValidationException("Бронирование уже обработано");
         }
 
-        if(approved){
+        if (approved) {
             booking.setStatus(BookingStatus.APPROVED);
-        }else{
+        } else {
             booking.setStatus(BookingStatus.REJECTED);
         }
 
@@ -79,12 +76,12 @@ public class BookingServiceImpl implements BookingService{
     public Booking getById(Long bookingId, Long userId) {
 
         Booking booking = bookingRepository.findById(bookingId)
-                .orElseThrow(()-> new NotFoundException("Бронирование с id=" + bookingId + " не найдено"));
+                .orElseThrow(() -> new NotFoundException("Бронирование с id=" + bookingId + " не найдено"));
 
         User owner = booking.getItem().getOwner();
         User booker  = booking.getBooker();
 
-        if(!(owner.getId().equals(userId) || booker.getId().equals(userId))){
+        if (!(owner.getId().equals(userId) || booker.getId().equals(userId))) {
             throw new NotFoundException("Просматривать информацию может либо автор бронирования, либо владельц вещи,");
         }
 
@@ -100,7 +97,7 @@ public class BookingServiceImpl implements BookingService{
         LocalDateTime now = LocalDateTime.now();
 
 
-        switch (state){
+        switch (state) {
             case "ALL" -> {
                 return bookingRepository.findAllByBookerIdOrderByStartDesc(userId);
             }
@@ -131,7 +128,7 @@ public class BookingServiceImpl implements BookingService{
         }
         LocalDateTime now = LocalDateTime.now();
 
-        switch (state){
+        switch (state) {
             case "ALL" -> {
                 return bookingRepository.findAllByItemOwnerIdOrderByStartDesc(ownerId);
             }

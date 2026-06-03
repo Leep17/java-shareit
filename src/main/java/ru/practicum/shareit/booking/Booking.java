@@ -39,7 +39,9 @@ public class Booking {
     @Column(name = "status", nullable = false)
     private BookingStatus status;
 
-    public Booking(){}
+    public Booking() {
+
+    }
 
     public Booking(LocalDateTime start,
                    LocalDateTime end) {

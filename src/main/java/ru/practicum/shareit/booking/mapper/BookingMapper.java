@@ -17,7 +17,7 @@ public class BookingMapper {
         );
     }
 
-    public static Booking toBooking(BookingCreateDto bookingCreateDto){
+    public static Booking toBooking(BookingCreateDto bookingCreateDto) {
         return new Booking(bookingCreateDto.getStart(),
                            bookingCreateDto.getEnd());
     }

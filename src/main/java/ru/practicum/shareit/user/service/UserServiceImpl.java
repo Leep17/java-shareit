@@ -57,11 +57,11 @@ public class UserServiceImpl implements UserService {
 
         User changedUser = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Пользователь с id=" + id + " не найден"));
-        if(user.getName()!=null){
+        if (user.getName() != null) {
             changedUser.setName(user.getName());
         }
 
-        if (user.getEmail()!=null){
+        if (user.getEmail() != null) {
             changedUser.setEmail(user.getEmail());
         }
         return userRepository.save(changedUser);

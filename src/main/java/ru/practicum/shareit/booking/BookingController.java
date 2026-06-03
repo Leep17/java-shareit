@@ -6,8 +6,6 @@ import ru.practicum.shareit.booking.dto.BookingCreateDto;
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.mapper.BookingMapper;
 import ru.practicum.shareit.booking.service.BookingService;
-import ru.practicum.shareit.item.dto.ItemDto;
-
 import java.util.List;
 
 /**
@@ -21,7 +19,7 @@ public class BookingController {
 private final BookingService bookingService;
 
     @GetMapping
-    public List<BookingDto> findAll(@RequestHeader("X-Sharer-User-Id") Long userId, @RequestParam(defaultValue = "ALL") String state){
+    public List<BookingDto> findAll(@RequestHeader("X-Sharer-User-Id") Long userId, @RequestParam(defaultValue = "ALL") String state) {
         return bookingService.getAllByBooker(userId, state).stream()
                 .map(BookingMapper::toBookingDto)
                 .toList();
@@ -36,7 +34,7 @@ private final BookingService bookingService;
 
     @GetMapping("/{bookingId}")
     public BookingDto getById(@RequestHeader("X-Sharer-User-Id") Long userId,
-                              @PathVariable Long bookingId){
+                              @PathVariable Long bookingId) {
         return BookingMapper.toBookingDto(bookingService.getById(bookingId, userId));
     }
 
@@ -48,7 +46,7 @@ private final BookingService bookingService;
     }
 
     @PostMapping
-    public BookingDto saveBooking (@RequestHeader("X-Sharer-User-Id") Long userId,
+    public BookingDto saveBooking(@RequestHeader("X-Sharer-User-Id") Long userId,
                                    @RequestBody BookingCreateDto bookingCreateDto) {
         return BookingMapper.toBookingDto(bookingService.save(bookingCreateDto, userId));
     }
