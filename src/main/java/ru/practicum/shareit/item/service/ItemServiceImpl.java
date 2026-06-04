@@ -1,5 +1,6 @@
 package ru.practicum.shareit.item.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.Booking;
@@ -55,6 +56,7 @@ public class ItemServiceImpl implements ItemService {
         return itemRepository.save(item);
     }
 
+    @Transactional
     @Override
     public Item update(ItemDto itemDto, Long userId, Long itemId) {
 
@@ -77,7 +79,7 @@ public class ItemServiceImpl implements ItemService {
             changedItem.setDescription(item.getDescription());
         }
 
-        return itemRepository.save(changedItem);
+        return changedItem;
     }
 
     @Override

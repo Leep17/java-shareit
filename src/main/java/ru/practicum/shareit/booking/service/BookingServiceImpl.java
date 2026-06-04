@@ -1,5 +1,6 @@
 package ru.practicum.shareit.booking.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.Booking;
@@ -47,6 +48,7 @@ public class BookingServiceImpl implements BookingService {
         return bookingRepository.save(booking);
     }
 
+    @Transactional
     @Override
     public Booking updateStatus(Long bookingId, Long userId, Boolean approved) {
 
@@ -69,7 +71,7 @@ public class BookingServiceImpl implements BookingService {
             booking.setStatus(BookingStatus.REJECTED);
         }
 
-        return bookingRepository.save(booking);
+        return booking;
     }
 
     @Override
