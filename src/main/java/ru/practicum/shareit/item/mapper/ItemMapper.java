@@ -2,6 +2,7 @@ package ru.practicum.shareit.item.mapper;
 
 import ru.practicum.shareit.item.dto.CommentDto;
 import ru.practicum.shareit.item.dto.ItemDto;
+import ru.practicum.shareit.item.dto.ItemResponseDto;
 import ru.practicum.shareit.item.dto.ItemWithDatesDto;
 import ru.practicum.shareit.item.model.Item;
 
@@ -40,5 +41,11 @@ public class ItemMapper {
                 nextBooking,
                 comments
         );
+    }
+
+    public static ItemResponseDto toItemResponseDto(Item item){
+        return new ItemResponseDto(item.getId(),
+                                   item.getName(),
+                                   item.getOwner().getId());
     }
 }

@@ -3,6 +3,7 @@ package ru.practicum.shareit.request;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import ru.practicum.shareit.user.User;
 import java.time.LocalDateTime;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "requests")
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 public class ItemRequest {
     @Id
@@ -27,4 +29,8 @@ public class ItemRequest {
 
     @Column(name = "created", nullable = false)
     private LocalDateTime created;
+
+    public ItemRequest(String description) {
+        this.description = description;
+    }
 }
