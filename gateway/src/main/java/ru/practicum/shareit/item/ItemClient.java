@@ -68,5 +68,4 @@ public class ItemClient extends BaseClient {
 
         return post("/{itemId}/comment", userId, parameters, commentDto);
     }
-
 }
