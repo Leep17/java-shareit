@@ -3,6 +3,7 @@ package ru.practicum.shareit.user.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.exception.ConflictException;
+import ru.practicum.shareit.exception.NotFoundException;
 import ru.practicum.shareit.exception.ValidationException;
 import ru.practicum.shareit.user.User;
 import ru.practicum.shareit.user.repository.UserRepository;
@@ -20,7 +21,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getById(Long id) {
-        return userRepository.findById(id);
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Пользователь с id=" + id + " не найден"));
+        return user;
     }
 
     @Override
@@ -51,7 +54,17 @@ public class UserServiceImpl implements UserService {
                 throw new ConflictException("Email уже используется");
             }
         }
-        return userRepository.update(id, user);
+
+        User changedUser = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Пользователь с id=" + id + " не найден"));
+        if (user.getName() != null) {
+            changedUser.setName(user.getName());
+        }
+
+        if (user.getEmail() != null) {
+            changedUser.setEmail(user.getEmail());
+        }
+        return userRepository.save(changedUser);
     }
 
     @Override
