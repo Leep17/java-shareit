@@ -43,7 +43,7 @@ public class ItemMapper {
         );
     }
 
-    public static ItemResponseDto toItemResponseDto(Item item){
+    public static ItemResponseDto toItemResponseDto(Item item) {
         return new ItemResponseDto(item.getId(),
                                    item.getName(),
                                    item.getOwner().getId());

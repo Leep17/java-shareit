@@ -53,7 +53,7 @@ public class ItemServiceImpl implements ItemService {
             throw new ValidationException("Статус доступности должен быть указан");
         }
 
-        if(itemDto.getRequestId()!=null) {
+        if (itemDto.getRequestId() != null) {
             item.setRequest(itemRequestRepository.findById(itemDto.getRequestId())
                     .orElseThrow(() -> new NotFoundException("Запрос с id=" + itemDto.getRequestId() + " не найден")));
         }
