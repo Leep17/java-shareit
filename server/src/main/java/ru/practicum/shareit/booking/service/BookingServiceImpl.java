@@ -24,6 +24,7 @@ public class BookingServiceImpl implements BookingService {
     public final UserRepository userRepository;
     public final ItemRepository itemRepository;
 
+    @Transactional
     @Override
     public Booking save(BookingCreateDto bookingCreateDto, Long userId) {
         User booker = userRepository.findById(userId)

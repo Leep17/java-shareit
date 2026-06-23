@@ -34,6 +34,7 @@ public class ItemServiceImpl implements ItemService {
     private final CommentRepository commentRepository;
     private final ItemRequestRepository itemRequestRepository;
 
+    @Transactional
     @Override
     public Item save(ItemDto itemDto, Long userId) {
 
